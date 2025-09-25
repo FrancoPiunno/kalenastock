@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Tokens usados por shadcn (light) */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 224 71.4% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+}
+.bg-background{background-color:hsl(var(--background))}
+.text-foreground{color:hsl(var(--foreground))}
+.bg-card{background-color:hsl(var(--card))}
+.text-muted-foreground{color:hsl(var(--muted-foreground))}
+.bg-muted{background-color:hsl(var(--muted))}
+.border{border-color:hsl(var(--border))}
+
+/* Base mínima */
+*{border-color:hsl(var(--border))}
+body{background:hsl(var(--background));color:hsl(var(--foreground))}
