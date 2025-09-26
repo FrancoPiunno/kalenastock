@@ -91,7 +91,51 @@ export default function InventoryPage() {
       toast.error(e?.message ?? "No se pudo actualizar")
     }
   }
+
   // ---------------------------------------
+  // Enviar stock por email (usa /api/email-stock)
+  async function handleSendStockEmail() {
+    const html = `
+      <h2>Stock actual</h2>
+      <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Producto</th><th>Stock</th><th>Mínimo</th></tr>
+        ${sortedItems
+          .map(
+            (i) => `
+          <tr>
+            <td>${i.nombre}</td>
+            <td>${i.stockActual ?? 0}</td>
+            <td>${i.stockMin ?? 0}</td>
+          </tr>`
+          )
+          .join("")}
+      </table>
+    `
+
+    const csv = [
+      "nombre,stockActual,stockMin",
+      ...sortedItems.map((i) => `${i.nombre},${i.stockActual ?? 0},${i.stockMin ?? 0}`),
+    ].join("\n")
+
+    try {
+      const res = await fetch("/api/email-stock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: "destino@ejemplo.com", // Cambiar por email real
+          subject: "Reporte de stock",
+          html,
+          csv,
+        }),
+      })
+
+      const json = await res.json()
+      if (!res.ok) throw new Error(json?.error || "No se pudo enviar el email")
+      toast.success("Email enviado ✅")
+    } catch (e: any) {
+      toast.error(e?.message || "Error al enviar email")
+    }
+  }
 
   const showHeader = mode === "home"
 
@@ -151,6 +195,9 @@ export default function InventoryPage() {
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold">Control de stock</h2>
             <div className="flex gap-2">
+              {/* NUEVO: botón directo */}
+              <Button onClick={handleSendStockEmail}>Enviar stock</Button>
+
               <SendStockEmailDialog />
               <BulkStockAdjustDialog onDone={refetch} />
             </div>
@@ -169,7 +216,7 @@ export default function InventoryPage() {
             </div>
           </Card>
 
-          {/* NUEVO: Tabla de Stock actual (contenedor que faltaba) */}
+          {/* Tabla de Stock actual */}
           <Card className="p-4">
             <h3 className="mb-3 text-lg font-semibold">Stock actual</h3>
             <div className="overflow-x-auto">
