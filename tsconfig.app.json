@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tsbuildinfo.app",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-
-    "strict": true,
-    "skipLibCheck": true,
-    "verbatimModuleSyntax": true,
     "resolveJsonModule": true,
-
-    "types": ["vite/client"],
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": ["./src/*"]
+    },
+    "types": ["vite/client"]
   },
-  "include": ["src"]
+  "include": ["src", "env.d.ts"]
 }

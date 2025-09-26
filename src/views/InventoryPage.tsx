@@ -118,11 +118,11 @@ export default function InventoryPage() {
     ].join("\n")
 
     try {
-      const res = await fetch("/api/email-stock", {
+      const res = await fetch("/.netlify/functions/email-stock", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          to: "destino@ejemplo.com", // Cambiar por email real
+          to: "francopiunno182@gmail.com", // Cambiar por email real
           subject: "Reporte de stock",
           html,
           csv,
