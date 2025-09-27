@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "netlify/.netlify/functions-compiled",
+    "types": ["@netlify/functions"],
+    "module": "ESNext"
+  },
+  "include": ["netlify/functions/**/*.ts"]
+}
