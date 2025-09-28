@@ -1,22 +1,199 @@
 @import "tailwindcss";
 
-/* Tokens usados por shadcn (light) */
-:root {
+/* ──────────────── FUENTE GLOBAL ──────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* ─────────────────────────────────────────────
+   THEME LIGHT (tokens shadcn + extras tablet)
+   ───────────────────────────────────────────── */
+:root{
+  /* tokens shadcn básicos */
   --background: 0 0% 100%;
   --foreground: 224 71.4% 4.1%;
   --card: 0 0% 100%;
   --card-foreground: 224 71.4% 4.1%;
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
+  --backgroundalert: 0 96.3% 89.4%;
   --border: 214.3 31.8% 91.4%;
+  --red: 0 73.7% 41.8%;
+  --red-foreground: 0 93.3% 94.1%;
+  /* nuevos tokens shadcn para Button, etc. */
+  --primary: 211 100% 50%;              /* #199cff */
+  --primary-foreground: 0 0% 100%;
+  --icon:211 100% 50%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 214.3 94.6% 92.7%;
+  --accent: 203 100% 90%;
+  --accent-foreground: 224 71% 12%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 214 31% 91%;
+  --ring: 211 100% 50%;
+  --radius: 20px;                       /* radios grandes para tablet */
+  --radius10: 10px;
+  --bordernone: none;
+  --green: ;
+  --green-foreground: ;
+
+  /* tamaños de fuente “tablet-first” */
+  --fs-display: 2rem;   --lh-display: 2.6rem;
+  --fs-h1: 1.5rem;      --lh-h1: 2rem;
+  --fs-h2: 1.25rem;     --lh-h2: 1.75rem;
+  --fs-body: 1.125rem;  --lh-body: 1.8rem;
+  --fs-hint: .95rem;    --lh-hint: 1.4rem;
+
+  /* sombras/tiles */
+  --shadow-tile: 0 8px 24px rgba(15,23,42,.08);
 }
+
+
+
+/* ─────────────────────────────────────────────
+   Base mínima + helpers
+   ───────────────────────────────────────────── */
+*{border-color:hsl(var(--border))}
+body{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #F2F2F2;
+  color:hsl(var(--foreground));
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+html,body,#root{height:100%}
+
+.bg-deleted{background-color:hsl(var(--red-foreground))}
+.bg-deleted2{background-color:hsl(var(--red))}
+.text-deleted{color:hsl(var(--red))}
+.bg-secondary2{background-color:hsl(var(--secondary-foreground))}
+.bg-secondary{background-color:hsl(var(--secondary))}
+.text-iconcolor{color:hsl(var(--icon))}
 .bg-background{background-color:hsl(var(--background))}
 .text-foreground{color:hsl(var(--foreground))}
 .bg-card{background-color:hsl(var(--card))}
 .text-muted-foreground{color:hsl(var(--muted-foreground))}
 .bg-muted{background-color:hsl(var(--muted))}
 .border{border-color:hsl(var(--border))}
+.border-none{border:none}
 
-/* Base mínima */
-*{border-color:hsl(var(--border))}
-body{background:hsl(var(--background));color:hsl(var(--foreground))}
+/* tipografías grandes reutilizables */
+.text-display{font-size:var(--fs-display);line-height:var(--lh-display);letter-spacing:-.02em}
+.text-h1{font-size:var(--fs-h1);line-height:var(--lh-h1)}
+.text-h2{font-size:var(--fs-h2);line-height:var(--lh-h2)}
+.text-hint{font-size:var(--fs-hint);line-height:var(--lh-hint)}
+
+/* utilidades UI “tablet” */
+.bg-backgroundalert{background-color:hsl(var(--backgroundalert))}
+.rounded-xl2{border-radius:var(--radius)}
+.rounded-xl3{border-radius:30px}
+.rounded-10{border-radius:var(--radius10)}
+.shadow-tile{box-shadow:var(--shadow-tile)}
+.tap{user-select:none;touch-action:manipulation}
+
+/* ─────────────────────────────────────────────
+   SHADCN OVERRIDES
+   ───────────────────────────────────────────── */
+
+/* Cards */
+.border.bg-card{
+  padding: 30px;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: none;
+}
+
+/* Header h1 */
+.text-3xl{font-size:var(--fs-display);line-height:var(--lh-display);font-weight:500; line-height: 1.1;}
+
+/* Buttons XL */
+button.inline-flex{
+  border-radius: var(--radius) !important;
+  height: 3.5rem !important;
+  padding-inline: 1.25rem !important;
+  font-size: 1.125rem !important;
+  line-height: 1.3 !important;
+  font-weight: 600;
+}
+
+/* variantes comunes */
+button.bg-primary{background-color:hsl(var(--primary)) !important;color:hsl(var(--primary-foreground)) !important}
+button[data-variant="secondary"],
+button.variant-secondary{background-color:hsl(var(--secondary)) !important;color:hsl(var(--secondary-foreground)) !important}
+
+/* Separadores */
+hr, .border-b, .border-t, .border-l, .border-r{border-color:hsl(var(--border))}
+
+/* ─────────────────────────────────────────────
+   TILES HOME estilo mock
+   ───────────────────────────────────────────── */
+.border.bg-card.p-6{
+  border-radius: 30px;
+  position: relative;
+  gap: 20px;
+  min-height: fit-content;
+  padding: 50px;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+}
+.border.bg-card.p-6 h3{
+  font-size: 3.5rem;
+  line-height: 1;
+  letter-spacing: -2px;
+  font-weight:400;
+  margin: 0 0 8px 0;
+}
+.border.bg-card.p-6 p{
+  font-size: 1rem;
+  line-height: 1.5;
+  color:hsl(var(--muted-foreground));
+  margin:0;
+}
+
+/* ─────────────────────────────────────────────
+   Tabla “Stock actual”
+   ───────────────────────────────────────────── */
+table{border-collapse:separate;border-spacing:0 6px}
+thead th{
+  font-weight:600;
+  font-size:1rem;
+  color:hsl(var(--muted-foreground));
+  padding-bottom:.25rem;
+}
+tbody tr{background:hsl(var(--card))}
+.tabular-nums{font-variant-numeric:tabular-nums}
+tbody tr[class*="bg-red-"]{color:#ffffff; background-color:hsl(0 84% 60%); outline: 2px solid color-mix(in oklab, hsl(0 84% 60%), transparent 70%)}
+
+/* ─────────────────────────────────────────────
+   Inputs y selects XL
+   ───────────────────────────────────────────── */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  border: none;
+  background-color: #F2F2F2;
+  height: 3.5rem;
+  font-size: 1.125rem;
+  padding: 0 1rem;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+label {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: .9;
+}
+form button {
+  height: 3.5rem;
+  font-size: 1.125rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+

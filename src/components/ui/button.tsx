@@ -18,6 +18,14 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        egreso1:
+          "bg-deleted text-red-600",
+        egreso2:
+          "bg-red-600 text-white",
+        ingreso1:
+          "bg-emerald-100 text-emerald-600",
+        ingreso2:
+          "bg-emerald-600 text-white",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {
+  Card,
   CardHeader,
   CardTitle,
   CardDescription,
@@ -29,26 +30,23 @@ export function ItemManager({
   const disabled = !nombre.trim()
 
   return (
-    <>
-      <CardHeader>
-        <CardTitle>Gestión de productos</CardTitle>
-        <CardDescription>Alta, edición y baja de insumos</CardDescription>
-      </CardHeader>
-
-      <CardContent className="grid gap-6">
+    <div className="grid gap-6">
+      <h3 className="font-semibold text-2xl mb-3 ">Agregar producto</h3>
+      <div className="grid gap-6">
         {/* Formulario de alta */}
-        <div className="grid gap-4 rounded-md border p-4">
-          <div className="grid gap-1.5">
+        <div className="grid gap-6">
+          <div className="grid gap-3">
             <Label>Nombre</Label>
             <Input
-              placeholder="Ej: Bolsa transparente 1kg"
+              type="text"
+              placeholder="Ej: Bolson Transparente 42x64"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-1.5">
+          <div className="grid gap-3 md:grid-cols-3">
+            <div className="grid gap-3">
               <Label>Stock mínimo</Label>
               <Input
                 type="number"
@@ -58,7 +56,7 @@ export function ItemManager({
                 onChange={(e) => setStockMin(Number(e.target.value))}
               />
             </div>
-            <div className="grid gap-1.5">
+            <div className="grid gap-3">
               <Label>Stock inicial</Label>
               <Input
                 type="number"
@@ -85,54 +83,8 @@ export function ItemManager({
             </Button>
           </div>
         </div>
-
-        {/* Lista de productos */}
-        <div className="grid gap-2">
-          <h3 className="font-semibold">Lista de productos</h3>
-          {!items.length && (
-            <p className="text-sm text-muted-foreground">No hay productos cargados.</p>
-          )}
-          {items.map((it) => (
-            <div
-              key={it.id}
-              className="flex items-center justify-between rounded-md border p-2"
-            >
-              <div>
-                <div className="font-medium">{it.nombre}</div>
-                <div className="text-xs text-muted-foreground">
-                  Stock actual: {it.stockActual} · Mínimo: {it.stockMin}
-                </div>
-              </div>
-              <div className="flex gap-2">
-                {/* Editar */}
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      Editar
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Editar producto</DialogTitle>
-                    </DialogHeader>
-                    <EditForm item={it} onUpdate={onUpdate} />
-                  </DialogContent>
-                </Dialog>
-
-                {/* Eliminar */}
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => onSoftDelete(it.id)}
-                >
-                  Eliminar
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </>
+      </div>
+    </div>
   )
 }
 

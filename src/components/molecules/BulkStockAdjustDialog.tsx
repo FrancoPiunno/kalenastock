@@ -98,21 +98,21 @@ const savePerItem = async () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="destructive">⚠️ Ajuste masivo de stock</Button>
+        <Button className="bg-secondary2 text-iconcolor" variant="destructive">Ajuste de stock</Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-xl">
+      <DialogContent className="sm:max-w-xl gap-4">
         <DialogHeader>
-          <DialogTitle>Ajuste masivo de stock</DialogTitle>
+          <DialogTitle>Ajuste general de stock</DialogTitle>
         </DialogHeader>
 
-        <Tabs defaultValue="per-item">
+        <Tabs defaultValue="per-item" className="gap-4 w-full">
 
           {/* NUEVO contenido: edición uno a uno */}
-          <TabsContent value="per-item" className="space-y-3">
+          <TabsContent value="per-item" className="space-y-6">
             <div>
-              <label className="text-sm font-medium">Buscar</label>
               <Input
+                type="text"
                 className="mt-1"
                 placeholder="Escribí para filtrar productos..."
                 value={q}

@@ -75,18 +75,18 @@ export const MovementForm = memo(function MovementForm({
   )
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5">
+    <form onSubmit={handleSubmit} className="grid gap-8">
       <div className="flex items-center gap-3">
-        <Button
+        <Button className="variarnt"
           type="button"
-          variant={tipo === "EGRESO" ? "default" : "outline"}
+          variant={tipo === "EGRESO" ? "egreso2" : "egreso1"}
           onClick={() => setTipo("EGRESO")}
         >
           − Egreso
         </Button>
         <Button
           type="button"
-          variant={tipo === "INGRESO" ? "default" : "outline"}
+          variant={tipo === "INGRESO" ? "ingreso2" : "ingreso1"}
           onClick={() => setTipo("INGRESO")}
         >
           + Ingreso
@@ -94,17 +94,17 @@ export const MovementForm = memo(function MovementForm({
       </div>
 
       {/* Insumo */}
-      <div className="grid gap-2 relative z-50">   {/* 👈 relative + z-50 */}
+      <div className="grid gap-3 relative z-50">   {/* 👈 relative + z-50 */}
         <Label>Insumo</Label>
 
         <Select value={itemId} onValueChange={setItemId}>
-          <SelectTrigger className="z-50">       {/* 👈 también en el trigger */}
-            <SelectValue placeholder="Elegí un insumo..." />
+          <SelectTrigger className="z-50 bg-muted rounded-0 border-none shadow-none">       {/* 👈 también en el trigger */}
+            <SelectValue className="bg-muted" placeholder="Elegí un insumo..." />
           </SelectTrigger>
 
           {/* 👇 z alto + popper */}
           <SelectContent
-            className="z-[9999]"   
+            className="z-[9999] bg-muted"   
             position="popper"
             sideOffset={6}
             align="start"
@@ -127,7 +127,7 @@ export const MovementForm = memo(function MovementForm({
       </div>
 
       {/* Cantidad */}
-      <div className="grid gap-2">
+      <div className="grid gap-3">
         <Label>Cantidad</Label>
         <Input
           inputMode="numeric"
@@ -140,13 +140,13 @@ export const MovementForm = memo(function MovementForm({
       </div>
 
       {/* Responsable */}
-      <div className="grid gap-2">
+      <div className="grid gap-3">
         <Label>Responsable</Label>
         <Select value={responsable} onValueChange={setResponsable}>
-          <SelectTrigger>
+          <SelectTrigger className="z-50 bg-muted border-none shadow-none">
             <SelectValue placeholder="Elegí un empleado..." />
           </SelectTrigger>
-          <SelectContent className="z-50" position="popper" sideOffset={4} align="start">
+          <SelectContent className="z-50 bg-muted" position="popper" sideOffset={4} align="start">
             {empleados.map((e) => (
               <SelectItem key={e.id} value={e.nombre}>
                 {e.nombre}
@@ -157,9 +157,10 @@ export const MovementForm = memo(function MovementForm({
       </div>
 
       {/* Nota */}
-      <div className="grid gap-2">
+      <div className="grid gap-3">
         <Label>Nota (opcional)</Label>
         <Input
+          type="text"
           value={nota}
           onChange={(e) => setNota(e.target.value)}
           placeholder="Lote, orden, observación..."
@@ -167,7 +168,11 @@ export const MovementForm = memo(function MovementForm({
       </div>
 
       <div className="pt-2">
-        <Button type="submit" disabled={!canSubmit}>
+        <Button
+          type="submit"
+          disabled={!canSubmit}
+          className={tipo === "EGRESO" ? "bg-red-600 text-white" : "bg-emerald-600 text-white"}
+        >
           Confirmar {tipo.toLowerCase()}
         </Button>
       </div>

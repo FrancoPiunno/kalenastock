@@ -35,7 +35,7 @@ function TipoBadge({ tipo }: { tipo: Movement["tipo"] }) {
       variant={isIngreso ? "default" : "secondary"}
       className={cn(
         "text-xs",
-        isIngreso ? "bg-emerald-600 hover:bg-emerald-600" : "bg-slate-200 text-slate-900"
+        isIngreso ? "bg-emerald-600 hover:bg-emerald-600 text-white" : "bg-slate-200 text-slate-900"
       )}
     >
       {isIngreso ? "Ingreso" : "Egreso"}
@@ -77,7 +77,7 @@ export const MovementsTable = memo(function MovementsTable({
   return (
     <div className="relative">
       <Table>
-        <TableCaption>Últimos movimientos</TableCaption>
+        <TableCaption>Hasta los últimos 30 movimientos</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[110px]">Fecha</TableHead>
